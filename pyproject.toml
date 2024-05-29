@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "beta"
+version = "0.1.0"
+description = ""
+authors = ["Epanov Pavel <epanov.pavelm@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12.3"
+fastapi = "^0.111.0"
+async-sqlalchemy = "^1.0.0"
+dishka = "^1.2.0"
+ruff = "^0.4.6"
+mypy = "^1.10.0"
+gunicorn = "^22.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
