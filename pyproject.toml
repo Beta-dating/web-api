@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beta"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Epanov Pavel <epanov.pavelm@gmail.com>"]
 readme = "README.md"
