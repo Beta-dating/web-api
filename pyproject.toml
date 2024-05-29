@@ -13,6 +13,9 @@ dishka = "^1.2.0"
 ruff = "^0.4.6"
 mypy = "^1.10.0"
 gunicorn = "^22.0.0"
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+greenlet = "^3.0.3"
 
 
 [build-system]
