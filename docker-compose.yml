@@ -20,6 +20,9 @@ services:
       - .env
     ports:
       - 8001:8000
+    networks:
+      - custom
+
 
 networks:
   custom:
