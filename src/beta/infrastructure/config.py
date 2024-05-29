@@ -10,4 +10,5 @@ class DatabaseConfig:
     def from_env() -> "DatabaseConfig":
         uri = getenv("DATABASE_URI")
 
-        return DatabaseConfig(uri)
+        #return DatabaseConfig(uri)
+        return DatabaseConfig("postgresql+asyncpg://postgres:postgres@postgres:5432/database")
