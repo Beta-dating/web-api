@@ -6,7 +6,7 @@ authors = ["Epanov Pavel <epanov.pavelm@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12.3"
+python = "^3.12"
 fastapi = "^0.111.0"
 async-sqlalchemy = "^1.0.0"
 dishka = "^1.2.0"
@@ -21,3 +21,8 @@ greenlet = "^3.0.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+src = ["src"]
+exclude = ["migrations/*"]
