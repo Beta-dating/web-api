@@ -25,4 +25,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 79
 src = ["src"]
-exclude = ["migrations/*"]
+exclude = ["src/beta/infrastructure/data_access/migrations/*"]
