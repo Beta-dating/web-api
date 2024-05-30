@@ -19,7 +19,9 @@ class UserDb(Base):
             id=cast(int, self.id),
             username=cast(str, self.username),
             is_blocked=cast(bool, self.is_blocked),
+
         )
+
 
 
 
