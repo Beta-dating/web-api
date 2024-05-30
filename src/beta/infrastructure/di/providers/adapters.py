@@ -7,8 +7,11 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
+from sqlalchemy.orm import sessionmaker
 
 from src.beta.infrastructure.config import DatabaseConfig
+from src.beta.domain.user.repositories import UserRepository
+from src.beta.infrastructure.data_access.repositories.user import SqlalchemyUserRepository
 
 
 class SqlalchemyProvider(Provider):
@@ -25,7 +28,7 @@ class SqlalchemyProvider(Provider):
             self, engine: AsyncEngine,
     ) -> async_sessionmaker[AsyncSession]:
         return async_sessionmaker(
-            bind=engine, expire_on_commit=False, class_=AsyncEngine
+            bind=engine, expire_on_commit=False, class_=AsyncSession,
         )
 
     @provide(scope=Scope.REQUEST, provides=AsyncSession)
@@ -34,3 +37,9 @@ class SqlalchemyProvider(Provider):
     ) -> AsyncIterable[AsyncSession]:
         async with sessionmaker() as session:
             yield session
+
+    user_repository = provide(
+        SqlalchemyUserRepository,
+        scope=Scope.REQUEST,
+        provides=UserRepository,
+    )

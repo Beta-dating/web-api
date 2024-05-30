@@ -33,7 +33,7 @@ class Username(ValueObject[str]):
 @dataclass(frozen=True)
 class IsBlocked(ValueObject[bool]):
     def validate(self) -> None:
-        if not isinstance(self.to_raw(), str):
+        if not isinstance(self.to_raw(), bool):
             raise DomainValidationError(
-                f"IsBlocked field must be a bool, not {type(self.to_raw())}"
+                f"Is Blocked field must be a bool, not {type(self.to_raw())}"
             )

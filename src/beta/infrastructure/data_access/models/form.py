@@ -1,6 +1,7 @@
 from typing import cast
 
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import ForeignKey
 
 from src.beta.domain.form.entities import Form
 from src.beta.domain.form.value_objects import GenderT
@@ -18,6 +19,8 @@ class FormDb(Base):
     is_active: Mapped[bool] = mapped_column(nullable=False)
     preference: Mapped[str] = mapped_column(nullable=False)
 
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"))
+
     def to_entity(self) -> Form:
         return Form.create(
             id=cast(int, self.id),
@@ -27,4 +30,5 @@ class FormDb(Base):
             description=cast(str, self.description),
             is_active=cast(bool, self.is_active),
             preference=cast(str, self.preference),
+            user_id=cast(int, self.user_id),
         )

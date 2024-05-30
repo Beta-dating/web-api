@@ -20,6 +20,7 @@ class Form(Entity[FormId]):
     description: str
     is_active: bool
     preference: str
+    user_id: int
 
     @staticmethod
     def create(
@@ -30,6 +31,7 @@ class Form(Entity[FormId]):
             description: str,
             is_active: bool,
             preference: str,
+            user_id: int
     ) -> "Form":
         return Form(
             id=FormId(id),
@@ -39,4 +41,5 @@ class Form(Entity[FormId]):
             description=Description(description),
             is_active=IsActive(is_active),
             preference=Preference(preference),
+            user_id=user_id,
         )
