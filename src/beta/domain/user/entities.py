@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from beta.domain.common.entities import Entity
-from beta.domain.user.value_objects import UserId, Username, IsBlocked
+from src.beta.domain.common.entities import Entity
+from src.beta.domain.user.value_objects import UserId, Username, IsBlocked
 
 
 @dataclass

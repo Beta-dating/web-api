@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from beta.domain.common.exceptions import DomainValidationError
-from beta.domain.common.value_objects import ValueObject
+from src.beta.domain.common.exceptions import DomainValidationError
+from src.beta.domain.common.value_objects import ValueObject
 
 
 @dataclass(frozen=True)

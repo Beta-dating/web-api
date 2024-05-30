@@ -1,5 +1,8 @@
 FROM python:3.12.3
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 RUN mkdir /beta
 
 WORKDIR /beta
@@ -9,6 +12,4 @@ RUN pip install poetry && poetry config virtualenvs.create false && poetry insta
 
 COPY conf /beta/conf
 COPY src /beta/src
-RUN cd /beta
-
-CMD gunicorn -c conf/gunicorn.conf.py 'src.beta.main.web_api:create_app()'
+COPY alembic.ini /beta
