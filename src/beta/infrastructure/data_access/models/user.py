@@ -1,7 +1,6 @@
 from typing import cast
 
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey
 
 from src.beta.domain.user.entities import User
 from src.beta.infrastructure.data_access.models.base import Base

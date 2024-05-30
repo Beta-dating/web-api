@@ -7,7 +7,6 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
-from sqlalchemy.orm import sessionmaker
 
 from src.beta.infrastructure.config import DatabaseConfig
 from src.beta.domain.user.repositories import UserRepository

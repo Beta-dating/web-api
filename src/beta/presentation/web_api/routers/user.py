@@ -1,8 +1,6 @@
-from typing import Annotated
-
 from dishka import FromDishka
 from dishka.integrations.fastapi import DishkaRoute
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
 from src.beta.application.contracts.user.request import CreateUserRequest
 from src.beta.application.contracts.user.response import UserResponse
