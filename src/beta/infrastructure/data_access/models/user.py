@@ -3,8 +3,8 @@ from typing import cast
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import ForeignKey
 
-from beta.domain.user.entities import User
-from beta.infrastructure.data_access.models.base import Base
+from src.beta.domain.user.entities import User
+from src.beta.infrastructure.data_access.models.base import Base
 
 
 class UserDb(Base):

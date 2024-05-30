@@ -2,9 +2,9 @@ from typing import cast
 
 from sqlalchemy.orm import Mapped, mapped_column
 
-from beta.domain.form.entities import Form
-from beta.domain.form.value_objects import GenderT
-from beta.infrastructure.data_access.models.base import Base
+from src.beta.domain.form.entities import Form
+from src.beta.domain.form.value_objects import GenderT
+from src.beta.infrastructure.data_access.models.base import Base
 
 
 class FormDb(Base):

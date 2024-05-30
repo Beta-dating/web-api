@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from beta.domain.common.entities import Entity
-from beta.domain.form.value_objects import (FormId,
+from src.beta.domain.common.entities import Entity
+from src.beta.domain.form.value_objects import (FormId,
                                             CustomName,
                                             Gender,
                                             Age,

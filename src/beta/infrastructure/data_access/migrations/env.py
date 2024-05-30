@@ -6,10 +6,10 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from beta.infrastructure.config import DatabaseConfig
-from beta.infrastructure.data_access.models.base import Base
-from beta.infrastructure.data_access.models.user import User
-from beta.infrastructure.data_access.models.form import Form
+from src.beta.infrastructure.config import DatabaseConfig
+from src.beta.infrastructure.data_access.models.base import Base
+from src.beta.infrastructure.data_access.models.user import User
+from src.beta.infrastructure.data_access.models.form import Form
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
