@@ -1,7 +1,8 @@
 from typing import cast
+from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import ForeignKey, BigInteger
+from sqlalchemy import ForeignKey, BigInteger, DateTime, func
 
 from src.beta.domain.form.entities import Form
 from src.beta.domain.form.value_objects import GenderT
@@ -19,6 +20,7 @@ class FormDb(BaseDb):
     description: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(nullable=False)
     preference: Mapped[str] = mapped_column(nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     user_id: Mapped[int] = mapped_column(
         BigInteger, ForeignKey("user.id", ondelete="CASCADE"), unique=True

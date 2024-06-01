@@ -1,7 +1,8 @@
 from typing import cast, TYPE_CHECKING
+from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import BigInteger
+from sqlalchemy import BigInteger, DateTime, func
 
 from src.beta.domain.user.entities import User
 from src.beta.infrastructure.data_access.models.base import BaseDb
@@ -16,6 +17,7 @@ class UserDb(BaseDb):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     username: Mapped[str] = mapped_column(nullable=False)
     is_blocked: Mapped[bool] = mapped_column(nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     form: Mapped["FormDb"] = relationship(back_populates="user", lazy="selectin")
 
