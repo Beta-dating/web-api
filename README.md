@@ -19,8 +19,9 @@
     ```
 
 * Создание новой миграции после изменения схемы базы данных
-  * `alembic revision --autogenerate -m "Migration comment"`
-
+  * ```shell
+    alembic revision --autogenerate -m "Migration comment"`
+    ```
 
 ---
 
