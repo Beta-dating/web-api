@@ -7,9 +7,9 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from src.beta.infrastructure.config import DatabaseConfig
-from src.beta.infrastructure.data_access.models.base import Base
-from src.beta.infrastructure.data_access.models.user import User
-from src.beta.infrastructure.data_access.models.form import Form
+from src.beta.infrastructure.data_access.models.base import BaseDb
+from src.beta.infrastructure.data_access.models.user import UserDb
+from src.beta.infrastructure.data_access.models.form import FormDb
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -28,7 +28,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata
+target_metadata = BaseDb.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

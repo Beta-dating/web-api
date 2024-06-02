@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "beta"
-version = "0.1.1"
-description = ""
-authors = ["Epanov Pavel <epanov.pavelm@gmail.com>"]
+version = "0.1.2"
+description = "Backend for ML dating app"
+authors = ["Epanov Pavel <epanov.pavelm@gmail.com>", "Yunakov Ilia <iyunakov@inbox.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 fastapi = "^0.111.0"
 async-sqlalchemy = "^1.0.0"
 dishka = "^1.2.0"
