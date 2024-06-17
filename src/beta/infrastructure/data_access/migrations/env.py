@@ -8,8 +8,14 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from src.beta.infrastructure.config import DatabaseConfig
 from src.beta.infrastructure.data_access.models.base import BaseDb
-from src.beta.infrastructure.data_access.models.user import UserDb
-from src.beta.infrastructure.data_access.models.form import FormDb
+from src.beta.infrastructure.data_access.models.user import UsersDb
+from src.beta.infrastructure.data_access.models.form import FormsDb
+from src.beta.infrastructure.data_access.models.preferences import PreferencesDb
+from src.beta.infrastructure.data_access.models.users_interests import UsersInterestsDb
+from src.beta.infrastructure.data_access.models.interests import InterestsDb
+from src.beta.infrastructure.data_access.models.metros import MetrosDb
+from src.beta.infrastructure.data_access.models.gender import GendersDb
+from src.beta.infrastructure.data_access.models.users_reactions import UsersReactionsDb
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
