@@ -1,4 +1,4 @@
-from typing import cast, TYPE_CHECKING
+from typing import cast
 from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -7,8 +7,7 @@ from sqlalchemy import BigInteger, DateTime, func
 from src.beta.domain.user.entities import User
 from src.beta.infrastructure.data_access.models.base import BaseDb
 
-if TYPE_CHECKING:
-    from src.beta.infrastructure.data_access.models.form import FormDb
+from src.beta.infrastructure.data_access.models.form import FormDb
 
 
 class UserDb(BaseDb):
