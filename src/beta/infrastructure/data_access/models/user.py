@@ -11,18 +11,11 @@ from src.beta.infrastructure.data_access.models.form import FormDb
 
 
 class UserDb(BaseDb):
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    username: Mapped[str] = mapped_column(nullable=False)
+    tg_username: Mapped[str] = mapped_column(nullable=False)
     is_blocked: Mapped[bool] = mapped_column(nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-
-    form: Mapped["FormDb"] = relationship(back_populates="user", lazy="selectin")
-
-    def to_entity(self) -> User:
-        return User.create(
-            id=cast(int, self.id),
-            username=cast(str, self.username),
-            is_blocked=cast(bool, self.is_blocked),
-        )
+    is_verified: Mapped[bool] = mapped_column(nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
