@@ -158,4 +158,17 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# Environment file
+.env
+
+# VSCode
+.vscode/
+
+# Application data files
 data/
+
+.ruff_cache
+
+# Other files
+test.py
+test[0-9].py

@@ -1,20 +1,28 @@
 [tool.poetry]
 name = "beta"
-version = "0.1.1"
-description = ""
-authors = ["Epanov Pavel <epanov.pavelm@gmail.com>"]
+version = "0.1.2"
+description = "Backend for ML dating app"
+authors = ["Epanov Pavel <epanov.pavelm@gmail.com>", "Yunakov Ilia <iyunakov@inbox.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12.3"
+python = "^3.10"
 fastapi = "^0.111.0"
 async-sqlalchemy = "^1.0.0"
 dishka = "^1.2.0"
 ruff = "^0.4.6"
 mypy = "^1.10.0"
 gunicorn = "^22.0.0"
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+greenlet = "^3.0.3"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+src = ["src"]
+exclude = ["src/beta/infrastructure/data_access/migrations/*"]

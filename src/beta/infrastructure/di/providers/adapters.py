@@ -9,6 +9,8 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from src.beta.infrastructure.config import DatabaseConfig
+from src.beta.domain.user.repositories import UserRepository
+from src.beta.infrastructure.data_access.repositories.user import SqlalchemyUserRepository
 
 
 class SqlalchemyProvider(Provider):
@@ -18,15 +20,28 @@ class SqlalchemyProvider(Provider):
 
     @provide(scope=Scope.APP)
     def provide_engine(self, config: DatabaseConfig) -> AsyncEngine:
-        return create_async_engine(config.db_uri)
+        # PostgreSQL Максимум соединений по умолчанию - 100
+        #  с данными настройками 4 воркера займут 40 соединений
+        return create_async_engine(
+            config.db_uri,
+            pool_size=10, 
+            max_overflow = 0,
+            pool_pre_ping = True,
+            connect_args = {
+                "timeout": 15,
+                "command_timeout": 5,
+                "server_settings": {
+                    "jit": "off",
+                    "application_name": "web-api",
+                }
+            }
+        )
 
     @provide(scope=Scope.APP)
     def provide_sessionmaker(
             self, engine: AsyncEngine,
     ) -> async_sessionmaker[AsyncSession]:
-        return async_sessionmaker(
-            bind=engine, expire_on_commit=False, class_=AsyncEngine
-        )
+        return async_sessionmaker(bind=engine, expire_on_commit=False)
 
     @provide(scope=Scope.REQUEST, provides=AsyncSession)
     async def provide_session(
@@ -34,3 +49,9 @@ class SqlalchemyProvider(Provider):
     ) -> AsyncIterable[AsyncSession]:
         async with sessionmaker() as session:
             yield session
+
+    user_repository = provide(
+        SqlalchemyUserRepository,
+        scope=Scope.REQUEST,
+        provides=UserRepository,
+    )
