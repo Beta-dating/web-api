@@ -1,28 +1,28 @@
-from typing import cast
-from datetime import datetime
+from typing import cast, TYPE_CHECKING
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import BigInteger, DateTime, func
 
-from src.beta.domain.user.entities import User
 from src.beta.infrastructure.data_access.models.base import BaseDb
+from src.beta.infrastructure.data_access.models.types.types import intpk, created_at, updated_at
 
-from src.beta.infrastructure.data_access.models.form import FormDb
+if TYPE_CHECKING:
+    from src.beta.infrastructure.data_access.models.form import FormsDb
+    from src.beta.infrastructure.data_access.models.users_reactions import UsersReactionsDb
+    from src.beta.infrastructure.data_access.models.preferences import PreferencesDb
 
 
-class UserDb(BaseDb):
-    __tablename__ = "user"
+class UsersDb(BaseDb):
+    __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    username: Mapped[str] = mapped_column(nullable=False)
+    id: Mapped[intpk]
+    tg_username: Mapped[str] = mapped_column(nullable=False)
     is_blocked: Mapped[bool] = mapped_column(nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    is_verified: Mapped[bool] = mapped_column(nullable=False)
+    created_at: Mapped[created_at]
+    updated_at: Mapped[updated_at]
 
-    form: Mapped["FormDb"] = relationship(back_populates="user", lazy="selectin")
+    form: Mapped["FormsDb"] = relationship(back_populates="user")
+    reactions: Mapped[list["UsersReactionsDb"]] = relationship(back_populates="user")
+    preference: Mapped["PreferencesDb"] = relationship(back_populates="user")
 
-    def to_entity(self) -> User:
-        return User.create(
-            id=cast(int, self.id),
-            username=cast(str, self.username),
-            is_blocked=cast(bool, self.is_blocked),
-        )
+
