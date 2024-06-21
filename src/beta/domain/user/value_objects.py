@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 
 from src.beta.domain.common.exceptions import DomainValidationError
 from src.beta.domain.common.value_objects import ValueObject
@@ -18,15 +19,15 @@ class UserId(ValueObject[int]):
 
 
 @dataclass(frozen=True)
-class Username(ValueObject[str]):
+class TgUsername(ValueObject[str]):
     def validate(self) -> None:
         if not isinstance(self.to_raw(), str):
             raise DomainValidationError(
-                f"Username must be a str, not {type(self.to_raw())}"
+                f"Telegram username must be a str, not {type(self.to_raw())}"
             )
         if len(self.to_raw()) < 0:
             raise DomainValidationError(
-                f"Username must be more 0 letters, not {self.to_raw()}"
+                f"Telegram username must be more 0 letters, not {self.to_raw()}"
             )
 
 
@@ -35,5 +36,32 @@ class IsBlocked(ValueObject[bool]):
     def validate(self) -> None:
         if not isinstance(self.to_raw(), bool):
             raise DomainValidationError(
-                f"Is Blocked field must be a bool, not {type(self.to_raw())}"
+                f"Is blocked field must be a bool, not {type(self.to_raw())}"
+            )
+
+
+@dataclass(frozen=True)
+class IsVerified(ValueObject[bool]):
+    def validate(self) -> None:
+        if not isinstance(self.to_raw(), bool):
+            raise DomainValidationError(
+                f"Is verified field must be a bool, not {type(self.to_raw())}"
+            )
+
+
+@dataclass(frozen=True)
+class CreatedAt(ValueObject[datetime]):
+    def validate(self) -> None:
+        if not isinstance(self.to_raw(), datetime):
+            raise DomainValidationError(
+                f"Created at field must be a datetime, not {type(self.to_raw())}"
+            )
+
+
+@dataclass(frozen=True)
+class UpdatedAt(ValueObject[datetime]):
+    def validate(self) -> None:
+        if not isinstance(self.to_raw(), datetime):
+            raise DomainValidationError(
+                f"Updated at field must be a datetime, not {type(self.to_raw())}"
             )

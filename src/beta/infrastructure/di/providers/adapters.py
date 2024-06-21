@@ -8,9 +8,11 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from src.beta.infrastructure.config import DatabaseConfig
 from src.beta.domain.user.repositories import UserRepository
-from src.beta.infrastructure.data_access.repositories.user import SqlalchemyUserRepository
+from src.beta.infrastructure.config import DatabaseConfig
+from src.beta.infrastructure.data_access.repositories.user import (
+    SqlalchemyUserRepository,
+)
 
 
 class SqlalchemyProvider(Provider):
@@ -24,28 +26,29 @@ class SqlalchemyProvider(Provider):
         #  с данными настройками 4 воркера займут 40 соединений
         return create_async_engine(
             config.db_uri,
-            pool_size=10, 
-            max_overflow = 0,
-            pool_pre_ping = True,
-            connect_args = {
+            pool_size=10,
+            max_overflow=0,
+            pool_pre_ping=True,
+            connect_args={
                 "timeout": 15,
                 "command_timeout": 5,
                 "server_settings": {
                     "jit": "off",
                     "application_name": "web-api",
-                }
-            }
+                },
+            },
         )
 
     @provide(scope=Scope.APP)
     def provide_sessionmaker(
-            self, engine: AsyncEngine,
+        self,
+        engine: AsyncEngine,
     ) -> async_sessionmaker[AsyncSession]:
         return async_sessionmaker(bind=engine, expire_on_commit=False)
 
     @provide(scope=Scope.REQUEST, provides=AsyncSession)
     async def provide_session(
-            self, sessionmaker: async_sessionmaker[AsyncSession]
+        self, sessionmaker: async_sessionmaker[AsyncSession]
     ) -> AsyncIterable[AsyncSession]:
         async with sessionmaker() as session:
             yield session

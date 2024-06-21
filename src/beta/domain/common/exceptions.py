@@ -8,4 +8,3 @@ class DomainException(Exception):
 
 class DomainValidationError(DomainException):
     """Exception for domain validation errors"""
-    

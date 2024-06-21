@@ -9,4 +9,3 @@ EntityId = TypeVar("EntityId", bound=ValueObject)
 @dataclass
 class Entity(Generic[EntityId]):
     id: EntityId
-    

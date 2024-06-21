@@ -10,10 +10,23 @@ class SqlalchemyUserRepository(UserRepository):
     def __init__(self, session: AsyncSession) -> None:
         self.session = session
 
-    async def create_user(self, username: str, is_blocked: bool) -> User:
-        stmt = ((insert(UserDb)
-                 .values(username=username, is_blocked=is_blocked))
-                 .returning(UserDb.id, UserDb.username, UserDb.is_blocked))
+    async def create_user(
+        self, tg_username: str, is_blocked: bool, is_verified: bool
+    ) -> User:
+        stmt = (
+            insert(UsersDb).values(
+                tg_username=tg_username,
+                is_blocked=is_blocked,
+                is_verified=is_verified,
+            )
+        ).returning(
+            UsersDb.id,
+            UsersDb.tg_username,
+            UsersDb.is_blocked,
+            UsersDb.is_verified,
+            UsersDb.created_at,
+            UsersDb.updated_at,
+        )
 
         result = await self.session.execute(stmt)
         await self.session.commit()
@@ -22,6 +35,9 @@ class SqlalchemyUserRepository(UserRepository):
 
         return User.create(
             id=result.id,
-            username=result.username,
+            tg_username=result.tg_username,
             is_blocked=result.is_blocked,
+            is_verified=result.is_verified,
+            created_at=result.created_at,
+            updated_at=result.updated_at,
         )

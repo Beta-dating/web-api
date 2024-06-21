@@ -1,13 +1,20 @@
-from typing import cast, TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.beta.infrastructure.data_access.models.base import BaseDb
-from src.beta.infrastructure.data_access.models.types.types import intpk, created_at, updated_at
+from src.beta.infrastructure.data_access.models.types.types import (
+    created_at,
+    intpk,
+    updated_at,
+)
+
 if TYPE_CHECKING:
+    from src.beta.infrastructure.data_access.models.interests import (
+        InterestsDb,
+    )
     from src.beta.infrastructure.data_access.models.user import UsersDb
-    from src.beta.infrastructure.data_access.models.interests import InterestsDb
 
 
 class FormsDb(BaseDb):
@@ -22,9 +29,17 @@ class FormsDb(BaseDb):
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 
-    gender_id: Mapped[int] = mapped_column(ForeignKey("genders.id", ondelete="CASCADE"))
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
-    metro_id: Mapped[int] = mapped_column(ForeignKey("metros.id", ondelete="CASCADE"))
+    gender_id: Mapped[int] = mapped_column(
+        ForeignKey("genders.id", ondelete="CASCADE")
+    )
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE")
+    )
+    metro_id: Mapped[int] = mapped_column(
+        ForeignKey("metros.id", ondelete="CASCADE")
+    )
 
     user: Mapped["UsersDb"] = relationship(back_populates="form")
-    interests: Mapped[list["InterestsDb"]] = relationship(back_populates="form")
+    interests: Mapped[List["InterestsDb"]] = relationship(
+        back_populates="form"
+    )

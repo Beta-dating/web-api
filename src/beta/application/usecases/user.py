@@ -10,8 +10,9 @@ class CreateUser(Interactor[CreateUserRequest, UserResponse]):
 
     async def __call__(self, request: CreateUserRequest) -> UserResponse:
         user = await self.item_repository.create_user(
-            username=request.username,
+            tg_username=request.tg_username,
             is_blocked=request.is_blocked,
+            is_verified=request.is_verified,
         )
 
         return UserResponse.from_entity(user)
