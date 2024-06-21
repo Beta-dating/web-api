@@ -8,3 +8,6 @@ class UserRepository(Protocol):
         self, tg_username: str, is_blocked: bool, is_verified: bool
     ) -> User:
         raise NotImplementedError
+
+    async def get_user_by_id(self, user_id: int) -> User:
+        raise NotImplementedError

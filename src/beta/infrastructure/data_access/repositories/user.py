@@ -1,4 +1,4 @@
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.beta.domain.user.entities import User
@@ -41,3 +41,10 @@ class SqlalchemyUserRepository(UserRepository):
             created_at=result.created_at,
             updated_at=result.updated_at,
         )
+
+    async def get_user_by_id(self, user_id: int) -> User:
+        query = select(UsersDb).where(UsersDb.id == user_id)
+        result = await self.session.execute(query)
+        result = result.scalar()
+
+        return result.to_entity()
