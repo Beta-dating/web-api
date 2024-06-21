@@ -9,4 +9,3 @@ class GendersDb(BaseDb):
 
     id: Mapped[intpk]
     title: Mapped[str] = mapped_column(nullable=False)
-

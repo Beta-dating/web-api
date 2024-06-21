@@ -1,15 +1,16 @@
 from dataclasses import dataclass
 
 from src.beta.domain.common.entities import Entity
-from src.beta.domain.form.value_objects import (FormId,
-                                            CustomName,
-                                            Gender,
-                                            Age,
-                                            Description,
-                                            IsActive,
-                                            Preference,
-                                            GenderT
-                                            )
+from src.beta.domain.form.value_objects import (
+    Age,
+    CustomName,
+    Description,
+    FormId,
+    Gender,
+    GenderT,
+    IsActive,
+    Preference,
+)
 
 
 @dataclass
@@ -24,14 +25,14 @@ class Form(Entity[FormId]):
 
     @staticmethod
     def create(
-            id: int,
-            custom_name: str,
-            gender: GenderT,
-            age: int,
-            description: str,
-            is_active: bool,
-            preference: str,
-            user_id: int
+        id: int,
+        custom_name: str,
+        gender: GenderT,
+        age: int,
+        description: str,
+        is_active: bool,
+        preference: str,
+        user_id: int,
     ) -> "Form":
         return Form(
             id=FormId(id),

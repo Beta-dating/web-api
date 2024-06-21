@@ -1,5 +1,3 @@
-from typing import TYPE_CHECKING
-
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.beta.infrastructure.data_access.models.base import BaseDb

@@ -3,5 +3,6 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class CreateUserRequest:
-    username: str
+    tg_username: str
     is_blocked: bool
+    is_verified: bool
