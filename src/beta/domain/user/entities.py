@@ -2,12 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from src.beta.domain.common.entities import Entity
+from src.beta.domain.common.value_objects import CreatedAt, UpdatedAt
 from src.beta.domain.user.value_objects import (
-    CreatedAt,
     IsBlocked,
     IsVerified,
     TgUsername,
-    UpdatedAt,
     UserId,
 )
 

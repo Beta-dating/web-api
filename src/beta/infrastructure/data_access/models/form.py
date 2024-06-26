@@ -11,9 +11,11 @@ from src.beta.infrastructure.data_access.models.types.types import (
 )
 
 if TYPE_CHECKING:
+    from src.beta.infrastructure.data_access.models.gender import GendersDb
     from src.beta.infrastructure.data_access.models.interests import (
         InterestsDb,
     )
+    from src.beta.infrastructure.data_access.models.metros import MetrosDb
     from src.beta.infrastructure.data_access.models.user import UsersDb
 
 
@@ -43,3 +45,5 @@ class FormsDb(BaseDb):
     interests: Mapped[List["InterestsDb"]] = relationship(
         back_populates="form"
     )
+    gender: Mapped["GendersDb"] = relationship(back_populates="form")
+    metro: Mapped["MetrosDb"] = relationship(back_populates="form")

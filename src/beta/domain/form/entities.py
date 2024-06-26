@@ -1,46 +1,60 @@
 from dataclasses import dataclass
+from datetime import datetime
+from typing import List
 
 from src.beta.domain.common.entities import Entity
+from src.beta.domain.common.value_objects import CreatedAt, UpdatedAt
 from src.beta.domain.form.value_objects import (
     Age,
-    CustomName,
     Description,
+    FirstName,
     FormId,
     Gender,
     GenderT,
-    IsActive,
-    Preference,
+    Interests,
+    IsVisible,
+    LastName,
+    Metro,
 )
 
 
 @dataclass
 class Form(Entity[FormId]):
-    custom_name: str
-    gender: GenderT
+    first_name: str
+    last_name: str
     age: int
     description: str
-    is_active: bool
-    preference: str
-    user_id: int
+    is_visible: bool
+    gender: GenderT
+    interests: List[str]
+    metro: str
+    created_at: datetime
+    updated_at: datetime
 
     @staticmethod
     def create(
         id: int,
-        custom_name: str,
-        gender: GenderT,
+        first_name: str,
+        last_name: str,
         age: int,
         description: str,
-        is_active: bool,
-        preference: str,
-        user_id: int,
+        is_visible: bool,
+        gender: str,
+        interests: List[str],
+        metro: str,
+        created_at: datetime,
+        updated_at: datetime,
     ) -> "Form":
         return Form(
             id=FormId(id),
-            custom_name=CustomName(custom_name),
-            gender=Gender(gender),
+            first_name=FirstName(first_name),
+            last_name=LastName(last_name),
             age=Age(age),
             description=Description(description),
-            is_active=IsActive(is_active),
-            preference=Preference(preference),
-            user_id=user_id,
+            is_visible=IsVisible(is_visible),
+            gender=Gender(gender),
+            interests=Interests(interests),
+            metro=Metro(metro),
+            created_at=CreatedAt(created_at),
+            updated_at=UpdatedAt(updated_at),
         )

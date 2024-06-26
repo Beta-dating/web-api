@@ -8,8 +8,12 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
+from src.beta.domain.form.repositories import FormRepository
 from src.beta.domain.user.repositories import UserRepository
 from src.beta.infrastructure.config import DatabaseConfig
+from src.beta.infrastructure.data_access.repositories.form import (
+    SqlalchemyFormRepository,
+)
 from src.beta.infrastructure.data_access.repositories.user import (
     SqlalchemyUserRepository,
 )
@@ -57,4 +61,10 @@ class SqlalchemyProvider(Provider):
         SqlalchemyUserRepository,
         scope=Scope.REQUEST,
         provides=UserRepository,
+    )
+
+    form_repository = provide(
+        SqlalchemyFormRepository,
+        scope=Scope.REQUEST,
+        provides=FormRepository,
     )

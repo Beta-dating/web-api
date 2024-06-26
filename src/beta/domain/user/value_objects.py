@@ -47,21 +47,3 @@ class IsVerified(ValueObject[bool]):
             raise DomainValidationError(
                 f"Is verified field must be a bool, not {type(self.to_raw())}"
             )
-
-
-@dataclass(frozen=True)
-class CreatedAt(ValueObject[datetime]):
-    def validate(self) -> None:
-        if not isinstance(self.to_raw(), datetime):
-            raise DomainValidationError(
-                f"Created at field must be a datetime, not {type(self.to_raw())}"
-            )
-
-
-@dataclass(frozen=True)
-class UpdatedAt(ValueObject[datetime]):
-    def validate(self) -> None:
-        if not isinstance(self.to_raw(), datetime):
-            raise DomainValidationError(
-                f"Updated at field must be a datetime, not {type(self.to_raw())}"
-            )
